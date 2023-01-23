@@ -33,8 +33,25 @@ class NotificationController extends Controller
                                         'users.last_name AS last_name',
                                         'notifications.created_at AS created_at'
                                     ]);
+        
+        // Add created at as a string
+        $notifications = $this->addCreatedAtString($notifications);
 
-        return response($notifications, 200);
+        return response(['notifications' => $notifications], 200);
+    }
+
+    /**
+     * Add created at as a string
+     * 
+     * @param $notifications
+     * @return $notifications
+     */
+    public function addCreatedAtString($notifications) {
+        foreach($notifications as $notification) {
+            $notification->created_at_string = $notification->created_at->toDateTimeString();
+        }
+
+        return $notifications;
     }
 
     /**
