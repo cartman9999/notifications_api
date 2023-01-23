@@ -24,9 +24,11 @@ class NotificationController extends Controller
         $notifications = Notification::join('users', 'users.id', '=', 'notifications.user_id')
                                     ->where('notifications.organization_id', '=', $user->organization_id)
                                     ->orderBy('notifications.created_at', 'desc')
+                                    ->take(30)
                                     ->get([
                                         'notifications.id AS notification_id', 
                                         'notifications.event AS event',
+                                        'notifications.read_at AS read_at',
                                         'users.name AS name',
                                         'users.last_name AS last_name',
                                         'notifications.created_at AS created_at'
