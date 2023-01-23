@@ -1,6 +1,6 @@
 # Resilia Notifications Mini-system - Eric Montes de Oca
 
-#### **Explained Solution**
+### **Explained Solution**
 This Notifications system is based on the Training module from Resilia's Nonprofit Platform.
 
 The main idea is that organizations have two types of users:
@@ -30,10 +30,10 @@ The notifications mini-systems makes use of Laravel 8, Vue 3, TailwindCSS, Vite,
 "mysql": "^5.6"
 `````
 
-#### **Installation**
+#### Installation
 Here is a list of simple steps to install the project:
 
-#### Backend
+#### **Backend**
 1) Go into /backend/
 2) Create a copy of .enx.example using
 ````
@@ -54,7 +54,7 @@ php artisan migrate --seed
 ````
 7) Now, the backend API it's ready, go to *Execution* to start the backend project.
 
-#### Frontend
+#### **Frontend**
 1) Go to /frontend/
 2) Run the following command to install all dependencies:
 ````
@@ -62,7 +62,7 @@ npm install
 ````
 3) Go to *Execution* to start the frontend project.
 
-#### **Execution**
+#### Execution
 To run this project, you will need to start both backend and frontend projects:
 
 #### Backend
