@@ -16,7 +16,7 @@ class CourseController extends Controller
      * @return Course $courses
      */
     public function index() {
-        return Course::get(['id', 'name', 'created_at']);
+        return Course::get(['id', 'name', 'author', 'description']);
     }
 
     /**
@@ -25,7 +25,7 @@ class CourseController extends Controller
      * @param none
      * @return Course $courses
      */
-    public function show($course_id) {
+    public function show($course_id, Request $request) {
         // Obtain course
         $course = Course::find($course_id);
 
@@ -34,7 +34,22 @@ class CourseController extends Controller
             return response()->json(['message' => 'Course not found'], 404);
         }
 
-        return $course;
+        // Verify if user has watched course
+        $user = User::whereAccessToken($request->header('x-access-token'))
+                    ->first(['id']);
+
+        $watched = FinalizedCourse::whereUserId($user->id)
+                                ->whereCourseId($course->id)
+                                ->first();
+
+
+        // Create response
+        $response = [
+                        'course' => $course, 
+                        'watched' => ($watched) ? true : false
+                    ];
+
+        return response($response);
     }
 
     /**
