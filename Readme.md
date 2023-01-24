@@ -15,6 +15,9 @@ The choosen stack of technologies for this exercise are:
 - Laravel 8
 - Vue 3
 
+Solution diagrams:
+https://www.figma.com/file/wpfTKwpGmfzRN9eQ2IMAYM/Untitled?node-id=0%3A1&t=K45Y4Fy1UWCAHDVK-1
+
 ### Project Structure
 This project is divided in two folders:
 1) backend
