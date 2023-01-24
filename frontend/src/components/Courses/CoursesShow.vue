@@ -37,8 +37,8 @@
 <script setup>
 // import router from "@/router"
 import { useRoute } from 'vue-router';
-import { ref, reactive, computed, onMounted } from 'vue'
-import { onBeforeMount } from 'vue'
+import { reactive, onBeforeMount } from 'vue'
+import apiConf from '@/config/api.js'
 
 const data = reactive({
     course_id: null,
@@ -67,11 +67,10 @@ async function setCourseWatched() {
         body: JSON.stringify(bodyParams)
     }
     
-    const base_url = "http://127.0.0.1:5000/api/"
-    const endpoint = `courses/completed`
+    const url = apiConf.baseUrl + "/courses/completed"
 
     // Execute API Request to mark course as watched
-    const response = await fetch(base_url+endpoint, options)
+    const response = await fetch(url, options)
     const content = await response.json();
 
     // Set data watched as true if status is 201, else show error
@@ -81,17 +80,12 @@ async function setCourseWatched() {
     } else {
         data.message = "Error while trying to update course status."
     }
-
-    console.log("Actualiza")
-    console.log(content)
 }
 
 // Read data from API before mounting the component
 onBeforeMount(async () => {
-    console.log("Curso id")
     const route = useRoute()
     const course_id = route.params.course_id // read parameter id (it is reactive) 
-    console.log(course_id)
 
     // Obtain Course Details
     // Prepare options for API request
@@ -104,16 +98,14 @@ onBeforeMount(async () => {
         }
     }
     
-    const base_url = "http://127.0.0.1:5000/api/"
-    const endpoint = `courses/${course_id}`
+    // Define Url
+    const url = `${apiConf.baseUrl}/courses/${course_id}`
 
     // Execute API request to get course detail
-    const response = await fetch(base_url+endpoint, options)
+    const response = await fetch(url, options)
     const content = await response.json();
 
-    console.log("Curso")
-    console.log(content)
-
+    // Insert response content into data object
     data.course_id = content.course.id
     data.title = content.course.name
     data.author = content.course.author

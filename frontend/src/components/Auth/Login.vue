@@ -44,7 +44,8 @@
 <script setup>
 import logo from '@/assets/images/notify_logo.png'
 import router from "@/router"
-import { ref, reactive, computed, onMounted } from 'vue'
+import { reactive } from 'vue'
+import apiConf from '@/config/api.js'
 
 const data = reactive({
     email: null,
@@ -65,7 +66,8 @@ async function onSubmit() {
     }
     
     // Execute API request to Login
-    const response = await fetch("http://127.0.0.1:5000/api/login", options)
+    const url = `${apiConf.baseUrl}/login`
+    const response = await fetch(url, options)
     const content = await response.json()
 
     // If 401, show errors

@@ -45,8 +45,8 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router"
 import router from "@/router"
-import { reactive, computed, onMounted } from 'vue'
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, reactive } from 'vue'
+import apiConf from '@/config/api.js'
 
 const data = reactive({
   authenticated:  false,
@@ -63,11 +63,10 @@ async function logout() {
         'x-access-token': localStorage.getItem('api_access_token')
       }
     }
-    console.log("ggg")
     
     // Execute API request to Login
-    const response = await fetch("http://127.0.0.1:5000/api/logout", options)
-    console.log(response)
+    const url = `${apiConf.baseUrl}/logout`
+    const response = await fetch(url, options)
 
     if (response.status == 200) {
       // Remove local storage variables

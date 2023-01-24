@@ -32,11 +32,13 @@ class LoginController extends Controller
      * @return Response $response
      */
     public function logout(Request $request) {
-        
-        User::whereAccessToken($request->access_token)
-            ->update([
+        info("Logout");
+        info($request->access_token);
+        $user = User::whereAccessToken($request->header('x-access-token'))->first();
+        $user->update([
                     'access_token' => uniqid('user_', true)
                 ]);
+        info("Actualiza");
         
         return response(null, 200);
     }

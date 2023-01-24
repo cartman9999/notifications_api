@@ -19,8 +19,8 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
 import { reactive, onBeforeMount } from 'vue'
+import apiConf from '@/config/api.js'
 
 const data = reactive({
     courses: []
@@ -36,18 +36,18 @@ onBeforeMount(async () => {
     const options = {
         method: 'GET',
         headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('api_access_token')
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('api_access_token')
         }
     }
     
-    const base_url = "http://127.0.0.1:5000/api/"
-    const endpoint = `courses`
+    // Define Url
+    const url = `${apiConf.baseUrl}/courses`
 
     // Execute API request to get course detail
-    const response = await fetch(base_url+endpoint, options)
-    const content = await response.json();
+    const response = await fetch(url, options)
+    const content = await response.json()
 
     // Insert courses content into data
     data.courses.push(content)

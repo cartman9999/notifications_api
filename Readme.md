@@ -11,6 +11,10 @@ Therefore, we have two paths in the system. As a regular user, we can watch trai
 
 On the other hand, by logging in as an adminitrator, we are able to check the notifications created by the regular users activity in the platform.
 
+The choosen stack of technologies for this exercise are:
+- Laravel 8
+- Vue 3
+
 ### Project Structure
 This project is divided in two folders:
 1) backend
